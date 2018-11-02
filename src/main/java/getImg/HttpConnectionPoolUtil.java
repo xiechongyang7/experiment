@@ -1,9 +1,12 @@
+package getImg;
+
 import com.qcloud.cos.utils.IOUtils;
 import org.apache.http.*;
 import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -16,15 +19,18 @@ import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HttpContext;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLHandshakeException;
+import javax.xml.ws.Response;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.UnsupportedEncodingException;
@@ -63,7 +69,7 @@ public class HttpConnectionPoolUtil {
 
     public static CloseableHttpClient getHttpClient(String url){
         String hostName = url.split("/")[2];
-        System.out.println(hostName);
+//        System.out.println(hostName);
         int port = 80;
         if (hostName.contains(":")){
             String[] args = hostName.split(":");
@@ -214,6 +220,47 @@ public class HttpConnectionPoolUtil {
 //        return object;
 //    }
 
+    public static String  get(String url) throws Exception {
+
+
+//        HttpClient client = null;
+        HttpGet request = null;
+        String strResult = null;
+        HttpResponse response = null;
+
+        try {
+            request = new HttpGet(url);
+
+            request.setHeader("User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36");
+
+
+//            client = HttpClientBuilder.create().build();
+
+//发送get请求
+            response =  getHttpClient(url).execute(request);
+            return EntityUtils.toString(response.getEntity(), "utf-8");
+//             response;
+//            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+//                logger.info("请求成功" + response.toString());
+//                strResult = EntityUtils.toString(response.getEntity(), "utf-8");
+//                return strResult;
+//            } else {
+//                logger.info("响应信息 response header: " + response.getAllHeaders());
+//            }
+
+        } catch (IOException e) {
+//            e.printStackTrace(url+"错误");
+//            System.out.println();
+            throw new Exception(e+url);
+//            return null;
+        } finally {
+            if (request != null) {
+                request.releaseConnection();
+            }
+        }
+
+    }
     /**
      * 关闭连接池
      */
