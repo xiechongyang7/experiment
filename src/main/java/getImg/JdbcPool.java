@@ -6,7 +6,5 @@ package getImg;
  * @Createtime 2018/11/4 下午 9:40
  * @Author xiechongyang
  */
-public class JdbcPool {
 
 
-}
