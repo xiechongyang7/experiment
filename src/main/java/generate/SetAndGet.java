@@ -1,3 +1,4 @@
+package generate;
 
 import org.apache.commons.io.FileUtils;
 
@@ -13,7 +14,7 @@ import java.util.Scanner;
  * @Createtime 2018/11/14 10:57
  * @Author xie
  */
-public class tex {
+public class SetAndGet {
     public static void main(String[] arg) throws Exception {
         System.out.println("*********************start");
         Scanner sc = new Scanner(System.in);

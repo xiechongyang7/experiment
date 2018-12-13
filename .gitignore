@@ -1,0 +1,6 @@
+target/
+.settings/
+.classpath
+*.log
+.project
+ecasbe-core.iml
