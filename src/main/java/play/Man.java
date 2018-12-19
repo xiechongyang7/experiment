@@ -10,13 +10,13 @@ public class Man {
     private String name;
     private String sex;
 
-    private boolean isChuSheng;
+    private Boolean isChuSheng;
 
-    public boolean isChuSheng() {
+    public Boolean isChuSheng() {
         return isChuSheng;
     }
 
-    public void setChuSheng(boolean chuSheng) {
+    public void setChuSheng(Boolean chuSheng) {
         isChuSheng = chuSheng;
     }
 

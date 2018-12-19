@@ -21,4 +21,6 @@ public class hah {
 
             System.out.println(str[1]+"----"+str[3]);
     }
+
+
 }
