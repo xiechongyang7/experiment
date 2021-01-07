@@ -1,9 +1,7 @@
 package file;
 
-import org.apache.commons.io.FileUtils;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @Description
