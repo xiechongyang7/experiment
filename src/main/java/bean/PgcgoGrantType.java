@@ -1,4 +1,4 @@
-package model;
+package bean;
 
 /**
  * 授权类型

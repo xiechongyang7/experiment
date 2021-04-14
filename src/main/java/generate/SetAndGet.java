@@ -60,8 +60,13 @@ public class SetAndGet {
                 int lastStr = line.indexOf(";");
                 String value = "";
                 try{
-                    value = line.substring(bankLast+1,lastStr);
+                    if(bankLast+1 <= lastStr){
+                        value = line.substring(bankLast+1,lastStr);
+                    }else {
+                        continue;
+                    }
                 }catch (Exception e){
+                    e.printStackTrace();
                     System.out.println(value+"出错了");
                     continue;
                 }
